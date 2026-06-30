@@ -1,0 +1,416 @@
+/* ============================================================================
+   Dashboard One Piece — thème "carte au trésor / parchemin"
+   ============================================================================ */
+
+:root {
+  --parchment:      #f4e4c1;
+  --parchment-dark: #e6d2a8;
+  --parchment-deep: #d8bd86;
+  --ink:            #3a2410;
+  --ink-soft:       #6b4e2e;
+  --gold:           #c8962a;
+  --gold-bright:    #e6b54a;
+  --sea:            #1f6e8c;
+  --sea-deep:       #0e4257;
+  --jolly-red:      #a8201a;
+  --done:           #2e8b57;
+  --shadow:         rgba(58, 36, 16, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 20% 15%, #f7ecd2 0%, transparent 55%),
+    radial-gradient(circle at 85% 80%, #f2e0bb 0%, transparent 55%),
+    linear-gradient(160deg, var(--parchment) 0%, var(--parchment-dark) 60%, var(--parchment-deep) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  line-height: 1.55;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Décor de fond : taches de parchemin + boussole filigrane */
+.bg-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 88%, rgba(168, 130, 60, 0.10) 0, transparent 14%),
+    radial-gradient(circle at 78% 22%, rgba(168, 130, 60, 0.12) 0, transparent 16%),
+    radial-gradient(circle at 50% 50%, rgba(120, 80, 30, 0.05) 0, transparent 60%);
+}
+.bg-decor::after {
+  /* grande boussole en filigrane */
+  content: "✺";
+  position: absolute;
+  right: -3rem;
+  bottom: -3rem;
+  font-size: 22rem;
+  color: rgba(120, 80, 30, 0.05);
+  transform: rotate(-12deg);
+  font-family: 'Cinzel', serif;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) 3rem;
+}
+
+/* ============ EN-TÊTE ============ */
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+  position: relative;
+}
+.hero-flag {
+  font-size: clamp(3rem, 9vw, 5rem);
+  filter: drop-shadow(0 6px 10px var(--shadow));
+  animation: sway 4s ease-in-out infinite;
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50%      { transform: rotate(4deg); }
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+.hero-title {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(2.8rem, 11vw, 5.5rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow: 2px 3px 0 var(--gold), 4px 6px 12px var(--shadow);
+  margin: 0.2rem 0;
+}
+.hero-sub {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--ink-soft);
+}
+.hero-sub .accent { color: var(--jolly-red); font-weight: 700; }
+.hero-updated {
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+/* ============ STATS ============ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.8rem, 2.5vw, 1.2rem);
+  margin-top: 1rem;
+}
+.stat-card {
+  background: linear-gradient(155deg, #fbf3df, #efddb8);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 1.3rem 1.1rem;
+  text-align: center;
+  box-shadow: 0 6px 18px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.5);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.stat-card--wide { grid-column: 1 / -1; }
+.stat-icon { font-size: 1.9rem; line-height: 1; }
+.stat-label {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+.stat-value {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  color: var(--jolly-red);
+  line-height: 1.1;
+  margin-top: 0.2rem;
+}
+.stat-value--text {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  color: var(--sea-deep);
+}
+.stat-sub {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 0.15rem;
+}
+
+/* ============ TITRES DE SECTION ============ */
+.section-title {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  color: var(--ink);
+}
+.section-title--center { text-align: center; }
+
+/* ============ PROGRESSION GLOBALE (LOG POSE) ============ */
+.overall {
+  margin-top: 2.5rem;
+  background: linear-gradient(155deg, #fbf3df, #ecd9b2);
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  padding: 1.5rem clamp(1rem, 4vw, 2rem) 1.8rem;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+.overall-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.overall-pct {
+  font-family: 'Pirata One', cursive;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  color: var(--gold);
+  text-shadow: 1px 2px 0 var(--shadow);
+}
+.logpose {
+  position: relative;
+  height: 26px;
+  background: var(--sea-deep);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+  border: 2px solid var(--sea-deep);
+}
+.logpose-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--sea) 0%, var(--gold) 100%);
+  border-radius: 999px;
+  transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+.logpose-fill::after {
+  /* reflet de vague animé */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg, rgba(255,255,255,0.18) 0 10px, transparent 10px 20px);
+  animation: wave 1.2s linear infinite;
+}
+@keyframes wave { to { background-position: 28px 0; } }
+.logpose-ship {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -55%);
+  font-size: 1.3rem;
+  transition: left 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+}
+.overall-caption {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* ============ FRISE DES SAGAS / ARCS ============ */
+.journey { margin-top: 3rem; }
+.journey-legend {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0.5rem 0 2rem;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+.dot--done    { background: var(--done); }
+.dot--current { background: var(--gold); box-shadow: 0 0 0 3px rgba(200,150,42,0.3); }
+.dot--todo    { background: var(--parchment-deep); border: 1px solid var(--ink-soft); }
+
+.timeline {
+  position: relative;
+  padding-left: 2.2rem;
+}
+/* ligne verticale "route maritime" */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: repeating-linear-gradient(
+    var(--ink-soft) 0 8px, transparent 8px 16px);
+}
+
+.saga { margin-bottom: 2.2rem; }
+.saga-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+  position: relative;
+}
+.saga-head::before {
+  /* marqueur de saga sur la route */
+  content: "";
+  position: absolute;
+  left: -2.05rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--parchment);
+  border: 3px solid var(--ink-soft);
+}
+.saga-emoji { font-size: 1.5rem; }
+.saga-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  color: var(--ink);
+}
+.saga-subtitle {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.arcs {
+  display: grid;
+  gap: 0.6rem;
+}
+.arc {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 252, 244, 0.7);
+  border: 1.5px solid var(--parchment-deep);
+  border-radius: 12px;
+  padding: 0.7rem 1rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.arc::before {
+  /* petit point sur la route, aligné avec la timeline */
+  content: "";
+  position: absolute;
+  left: -1.92rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--parchment-deep);
+}
+.arc-marker {
+  font-size: 1.2rem;
+  width: 1.6rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+.arc-body { flex: 1; min-width: 0; }
+.arc-name {
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+.arc-meta {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+.arc-bar {
+  height: 7px;
+  background: var(--parchment-deep);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+.arc-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  transition: width 1.2s ease 0.3s;
+}
+
+/* États des arcs */
+.arc--done {
+  border-color: var(--done);
+  background: rgba(46, 139, 87, 0.10);
+}
+.arc--done::before { background: var(--done); }
+.arc--done .arc-bar-fill { width: 100%; background: var(--done); }
+
+.arc--current {
+  border-color: var(--gold);
+  background: linear-gradient(155deg, #fff6e0, #f6e3b6);
+  box-shadow: 0 4px 16px rgba(200,150,42,0.3);
+  transform: scale(1.015);
+}
+.arc--current::before {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(200,150,42,0.3);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(200,150,42,0.30); }
+  50%      { box-shadow: 0 0 0 7px rgba(200,150,42,0.12); }
+}
+.arc--current .arc-name { color: var(--jolly-red); font-weight: 700; }
+.arc--current .arc-bar-fill { background: linear-gradient(90deg, var(--sea), var(--gold)); }
+.arc--current .arc-marker { animation: sway 3s ease-in-out infinite; }
+
+.arc--todo { opacity: 0.62; }
+.arc--todo .arc-bar-fill { width: 0; }
+
+/* ============ FOOTER ============ */
+.footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--ink-soft);
+  padding-top: 1.5rem;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 560px) {
+  .stats { grid-template-columns: 1fr; }
+  .overall-head { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

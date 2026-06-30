@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Journal de Bord d'Anaïs — One Piece</title>
+  <meta name="description" content="Suivi de lecture du manga One Piece" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏴‍☠️</text></svg>" />
+</head>
+<body>
+  <!-- Décor de fond : grain de parchemin + boussole filigrane -->
+  <div class="bg-decor" aria-hidden="true"></div>
+
+  <main class="wrap">
+
+    <!-- ============ EN-TÊTE ============ -->
+    <header class="hero">
+      <div class="hero-flag" aria-hidden="true">🏴‍☠️</div>
+      <p class="hero-eyebrow">Journal de bord</p>
+      <h1 class="hero-title" id="reader-title">Le voyage d'Anaïs</h1>
+      <p class="hero-sub">à travers le Grand Line de <span class="accent">One&nbsp;Piece</span></p>
+      <p class="hero-updated" id="last-updated"></p>
+    </header>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-label="Statistiques de lecture">
+      <article class="stat-card">
+        <div class="stat-icon">📖</div>
+        <div class="stat-label">Chapitre actuel</div>
+        <div class="stat-value" id="stat-chapter">—</div>
+        <div class="stat-sub" id="stat-chapter-sub"></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-label">Tome actuel</div>
+        <div class="stat-value" id="stat-volume">—</div>
+        <div class="stat-sub" id="stat-volume-sub"></div>
+      </article>
+
+      <article class="stat-card stat-card--wide">
+        <div class="stat-icon">🧭</div>
+        <div class="stat-label">Arc en cours</div>
+        <div class="stat-value stat-value--text" id="stat-arc">—</div>
+        <div class="stat-sub" id="stat-saga"></div>
+      </article>
+    </section>
+
+    <!-- ============ PROGRESSION GLOBALE ============ -->
+    <section class="overall" aria-label="Progression globale">
+      <div class="overall-head">
+        <h2 class="section-title">Avancée dans l'œuvre</h2>
+        <span class="overall-pct" id="overall-pct">—</span>
+      </div>
+      <div class="logpose" title="Progression globale">
+        <div class="logpose-fill" id="overall-fill"></div>
+        <div class="logpose-ship" id="overall-ship" aria-hidden="true">⛵</div>
+      </div>
+      <p class="overall-caption" id="overall-caption"></p>
+    </section>
+
+    <!-- ============ FRISE DES SAGAS / ARCS ============ -->
+    <section class="journey" aria-label="Carte du voyage">
+      <h2 class="section-title section-title--center">La carte du voyage</h2>
+      <p class="journey-legend">
+        <span class="dot dot--done"></span> Terminé
+        <span class="dot dot--current"></span> En cours
+        <span class="dot dot--todo"></span> À découvrir
+      </p>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Fait avec ❤️ pour Anaïs · « Je vais devenir le Roi des Pirates ! »</p>
+    </footer>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
